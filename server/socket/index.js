@@ -55,9 +55,10 @@ const socket = (server) => {
     },
   });
 
-  io.use(authHandler);
+  // io.use(authHandler);
 
   const onConnection = (socket) => {
+    console.log("checking", socket.id);
     support.supportHandler(io, socket);
   };
 
