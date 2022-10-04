@@ -7,6 +7,9 @@ import {
 } from "@videosdk.live/react-sdk";
 import { authToken, createMeeting } from "./CreateMeeting";
 import ReactPlayer from "react-player";
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { settingMeetingId } from "../Product/actions";
 
 function JoinScreen({ getMeetingAndToken }) {
   const [meetingId, setMeetingId] = React.useState(null);
@@ -45,9 +48,24 @@ function Container(props) {
       {joined ? (
         <div>
           <Controls />
-          {[...participants.keys()].map((participantId, index) => (
-            <VideoComponent key={index} participantId={participantId} />
-          ))}
+          {[...participants.keys()].map((participantId, index) => {
+            return (
+              <div
+                style={{
+                  position: "relative",
+                  borderRadius: 8,
+                  overflow: "hidden",
+                  backgroundColor: "black",
+                  width: "100%",
+                  height: 300,
+                  display: "flex",
+                  justifyContent: "flex-start",
+                }}
+              >
+                <VideoComponent key={index} participantId={participantId} />;
+              </div>
+            );
+          })}
         </div>
       ) : (
         <button onClick={joinMeeting}>Join</button>
@@ -69,7 +87,7 @@ function Controls() {
 
 function VideoComponent(props) {
   const micRef = useRef(null);
-  const { webcamStream, micStream, webcamOn, micOn } = useParticipant(
+  const { webcamStream, micStream, webcamOn, micOn, isLocal } = useParticipant(
     props.participantId
   );
   const result = useParticipant(props?.participantId);
@@ -85,7 +103,7 @@ function VideoComponent(props) {
   );
 
   const videoStream = useMemo(() => {
-    if (webcamOn) {
+    if (webcamOn && webcamStream) {
       const mediaStream = new MediaStream();
       mediaStream.addTrack(webcamStream.track);
       return mediaStream;
@@ -94,7 +112,7 @@ function VideoComponent(props) {
 
   useEffect(() => {
     if (micRef.current) {
-      if (micOn) {
+      if (micOn && micStream) {
         const mediaStream = new MediaStream();
         mediaStream.addTrack(micStream.track);
         micRef.current.srcObject = mediaStream;
@@ -111,7 +129,7 @@ function VideoComponent(props) {
 
   return (
     <div key={props.participantId}>
-      {micOn && micRef && <audio ref={micRef} autoPlay />}
+      {micOn && micRef && <audio ref={micRef} muted={isLocal} autoPlay />}
       {webcamOn && (
         <ReactPlayer
           //
@@ -136,11 +154,18 @@ function VideoComponent(props) {
 }
 
 function MainApp() {
-  const [meetingId, setMeetingId] = useState(null);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const merchandId = useSelector((state) => state.account.user.merchant);
+  console.log("STATE DATA =====>", location?.state?.meetingId);
+  const [meetingId, setMeetingId] = useState(
+    location.state ? location?.state?.meetingId : null
+  );
   const getMeetingAndToken = async (id) => {
     const meetingId =
       id == null ? await createMeeting({ token: authToken }) : id;
     setMeetingId(meetingId);
+    dispatch(settingMeetingId(meetingId));
   };
 
   return authToken && meetingId ? (

@@ -4,17 +4,17 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import actions from '../../actions';
-import { ROLE_ADMIN } from '../../constants';
+import actions from "../../actions";
+import { ROLE_ADMIN } from "../../constants";
 
-import BrandList from '../../components/Manager/BrandList';
-import SubPage from '../../components/Manager/SubPage';
-import LoadingIndicator from '../../components/Common/LoadingIndicator';
-import NotFound from '../../components/Common/NotFound';
+import BrandList from "../../components/Manager/BrandList";
+import SubPage from "../../components/Manager/SubPage";
+import LoadingIndicator from "../../components/Common/LoadingIndicator";
+import NotFound from "../../components/Common/NotFound";
 
 class List extends React.PureComponent {
   componentDidMount() {
@@ -27,16 +27,16 @@ class List extends React.PureComponent {
     return (
       <>
         <SubPage
-          title={user.role === ROLE_ADMIN ? 'Brands' : 'Brand'}
-          actionTitle={user.role === ROLE_ADMIN && 'Add'}
-          handleAction={() => history.push('/dashboard/brand/add')}
+          title={user.role === ROLE_ADMIN ? "Brands" : "Brand"}
+          actionTitle={user.role === ROLE_ADMIN && "Add"}
+          handleAction={() => history.push("/dashboard/brand/add")}
         >
           {isLoading ? (
             <LoadingIndicator inline />
           ) : brands.length > 0 ? (
             <BrandList brands={brands} user={user} />
           ) : (
-            <NotFound message='no brands found.' />
+            <NotFound message="no brands found." />
           )}
         </SubPage>
       </>
@@ -44,11 +44,11 @@ class List extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     brands: state.brand.brands,
     isLoading: state.brand.isLoading,
-    user: state.account.user
+    user: state.account.user,
   };
 };
 

@@ -235,7 +235,7 @@ class Navigation extends React.PureComponent {
                   onClick={toggleCart}
                 />
                 <Nav navbar>
-                  {brands && brands.length > 0 && (
+                  {/* {brands && brands.length > 0 && (
                     <Dropdown
                       nav
                       inNavbar
@@ -255,7 +255,7 @@ class Navigation extends React.PureComponent {
                         </div>
                       </DropdownMenu>
                     </Dropdown>
-                  )}
+                  )} */}
                   <NavItem>
                     <NavLink
                       tag={ActiveLink}

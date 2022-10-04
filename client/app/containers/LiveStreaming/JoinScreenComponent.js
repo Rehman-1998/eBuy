@@ -2,7 +2,6 @@ import React from "react";
 export function JoinScreen({ getMeetingAndToken }) {
   const [meetingId, setMeetingId] = React.useState(null);
   const onClick = async () => {
-    console.log("hello");
     await getMeetingAndToken(meetingId);
   };
   return (
