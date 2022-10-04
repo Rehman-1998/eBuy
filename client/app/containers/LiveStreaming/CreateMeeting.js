@@ -1,5 +1,5 @@
 export const authToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI5MmU3NzE4Yy04ZDg0LTRhNmItYTc1NC02NTlhMTdhZTlmYTYiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY2NDE5OTU0MCwiZXhwIjoxNjY0ODA0MzQwfQ._rc6WDIhK1R1oJV7t3pFlHz-kgKDmWMtQIo5yhKN11Q";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI5MmU3NzE4Yy04ZDg0LTRhNmItYTc1NC02NTlhMTdhZTlmYTYiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY2NDg2ODc0NSwiZXhwIjoxNjY1NDczNTQ1fQ.UcMN8HrKl1CLE2GPWNaymkwjwPPJkB4h3kpeyFUbQA4";
 // console.log("Process====", process.env.REACT_APP_VIDEOSDK_SECRET_KEY);
 // API call to create meeting
 export const createMeeting = async ({ token }) => {
