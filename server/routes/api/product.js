@@ -156,7 +156,6 @@ router.get("/list", async (req, res) => {
     } else {
       products = await Product.aggregate(basicQuery.concat(paginateQuery));
     }
-    console.log("Products=====>", products[0]);
     res.status(200).json({
       products,
       totalPages: Math.ceil(count / limit),
@@ -293,7 +292,7 @@ router.post(
       const taxable = req.body.taxable;
       const isActive = req.body.isActive;
       const merchant = req.body.merchant;
-      const meetingId = null;
+      const meetingId = "";
       const meetingTime = req.body.meetingTime;
       // const brand = req.body.brand;
       const image = req.file;
@@ -361,25 +360,26 @@ router.get(
   auth,
   role.checkRole(role.ROLES.Admin, role.ROLES.Merchant),
   async (req, res) => {
+    console.log("REQ IN MErchant =====>", req.user);
     try {
       let products = [];
 
       if (req.user.merchant) {
-        const brands = await Brand.find({
-          merchant: req.user.merchant,
-        }).populate("merchant", "_id");
+        // const brands = await Brand.find({
+        //   merchant: req.user.merchant,
+        // }).populate("merchant", "_id");
 
-        const brandId = brands[0]?.["_id"];
+        // const brandId = brands[0]?.["_id"];
 
-        products = await Product.find({})
-          .populate({
-            path: "brand",
-            populate: {
-              path: "merchant",
-              model: "Merchant",
-            },
-          })
-          .where("brand", brandId);
+        products = await Product.find({ merchant: req.user.merchant });
+        // .populate({
+        //   path: "brand",
+        //   populate: {
+        //     path: "merchant",
+        //     model: "Merchant",
+        //   },
+        // })
+        // .where("brand", brandId);
       } else {
         products = await Product.find({});
       }

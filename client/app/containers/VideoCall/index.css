@@ -1,0 +1,14 @@
+.red {
+  background-color: #ed3737;
+  border: none;
+  color: white !important;
+  /* margin: 10px; */
+  text-align: center;
+}
+
+.blue {
+  background-color: rgb(62, 132, 246);
+  border: none;
+  color: white !important;
+  /* margin: 10px; */
+}

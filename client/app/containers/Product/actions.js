@@ -435,9 +435,10 @@ export const activateProduct = (id, value) => {
 // Set Product Id
 export const settingMeetingId = (meetingId) => {
   return async (dispatch, getState) => {
+    console.log("In Redux=====>", meetingId);
     try {
       const merchant = getState().account.user.merchant;
-      console.log("accoutn in action", getState().account);
+      console.log("accoutn in action", getState().account, meetingId);
 
       const response = await axios.post("/api/product/set-meeting-id", {
         meetingId,

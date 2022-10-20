@@ -16,7 +16,7 @@
     { "to": "", "name": "Account Details", "prefix": "/dashboard" },
     { "to": "/security", "name": "Account Security", "prefix": "/dashboard" },
     { "to": "/address", "name": "Address", "prefix": "/dashboard" },
-    { "to": "/live", "name": "Create Meeting" },
+    { "to": "/videocall", "name": "Create Meeting" },
     { "to": "/product", "name": "Products", "prefix": "/dashboard" },
     { "to": "/orders", "name": "Orders", "prefix": "/dashboard" },
     { "to": "/wishlist", "name": "WishList", "prefix": "/dashboard" },

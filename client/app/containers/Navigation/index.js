@@ -265,7 +265,7 @@ class Navigation extends React.PureComponent {
                       Shop
                     </NavLink>
                   </NavItem>
-                  <NavItem>
+                  {/* <NavItem>
                     <NavLink
                       tag={ActiveLink}
                       to="/live"
@@ -273,7 +273,7 @@ class Navigation extends React.PureComponent {
                     >
                       Live
                     </NavLink>
-                  </NavItem>
+                  </NavItem> */}
                   {authenticated ? (
                     <UncontrolledDropdown nav inNavbar>
                       <DropdownToggle nav>

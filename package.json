@@ -36,6 +36,8 @@
   "homepage": "https://github.com/mohamedsamara/mern-ecommerce#readme",
   "dependencies": {
     "@fontsource/poppins": "^4.5.9",
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@sendgrid/mail": "^7.7.0",
     "@videosdk.live/react-sdk": "^0.1.49",
     "autosuggest-highlight": "^3.1.1",
@@ -70,6 +72,7 @@
     "react-autosuggest": "^10.1.0",
     "react-bootstrap-table-next": "^3.1.5",
     "react-bootstrap-table2-toolkit": "^2.0.1",
+    "react-confirm-alert": "^3.0.6",
     "react-dom": "^16.8.6",
     "react-multi-carousel": "^2.5.5",
     "react-notification-system-redux": "^2.0.0",

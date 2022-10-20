@@ -4,6 +4,7 @@ import {
   MeetingConsumer,
   useMeeting,
   useParticipant,
+  usePubSub,
 } from "@videosdk.live/react-sdk";
 import { authToken, createMeeting } from "./CreateMeeting";
 import ReactPlayer from "react-player";
@@ -36,7 +37,6 @@ function Container(props) {
   const [joined, setJoined] = useState(false);
   const { join } = useMeeting();
   const { participants } = useMeeting();
-  console.log("PARTICAPANTS +++", participants.keys());
   const joinMeeting = () => {
     setJoined(true);
     join();
@@ -75,10 +75,18 @@ function Container(props) {
 }
 
 function Controls() {
+  const dispatch = useDispatch();
   const { leave, toggleMic, toggleWebcam } = useMeeting();
   return (
     <div>
-      <button onClick={leave}>Leave</button>
+      <button
+        onClick={() => {
+          leave();
+          dispatch(settingMeetingId(""));
+        }}
+      >
+        Leave
+      </button>
       <button onClick={toggleMic}>toggleMic</button>
       <button onClick={toggleWebcam}>toggleWebcam</button>
     </div>
@@ -91,16 +99,6 @@ function VideoComponent(props) {
     props.participantId
   );
   const result = useParticipant(props?.participantId);
-  console.log(
-    "Web Cam Stream ======>",
-    props,
-    result,
-    webcamStream
-    // micStream,
-    // webcamOn,
-    // micOn,
-    // props.participantId
-  );
 
   const videoStream = useMemo(() => {
     if (webcamOn && webcamStream) {
@@ -134,6 +132,7 @@ function VideoComponent(props) {
         <ReactPlayer
           //
           playsinline // very very imp prop
+          playIcon={<></>}
           pip={false}
           light={false}
           controls={true}
@@ -149,9 +148,108 @@ function VideoComponent(props) {
           }}
         />
       )}
+      <MeetingChat />
     </div>
   );
 }
+
+const MessageList = ({ messages }) => {
+  return (
+    <div>
+      {messages?.map((message, i) => {
+        const { senderName, message: text, timestamp } = message;
+
+        return (
+          <div
+            style={{
+              margin: 8,
+              backgroundColor: "darkblue",
+              borderRadius: 8,
+              overflow: "hidden",
+              padding: 8,
+              color: "#fff",
+            }}
+            key={i}
+          >
+            <p style={{ margin: 0, padding: 0, fontStyle: "italic" }}>
+              {senderName}
+            </p>
+            <h3 style={{ margin: 0, padding: 0, marginTop: 4 }}>{text}</h3>
+            <p
+              style={{
+                margin: 0,
+                padding: 0,
+                opacity: 0.6,
+                marginTop: 4,
+              }}
+            >
+              {formatAMPM(new Date(timestamp))}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const Title = ({ title, dark }) => {
+  return <h2 style={{ color: dark ? primary : "#fff" }}>{title}</h2>;
+};
+
+function formatAMPM(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  var strTime = hours + ":" + minutes + " " + ampm;
+  return strTime;
+}
+
+const MeetingChat = () => {
+  const { publish, messages } = usePubSub("CHAT", {});
+  const [message, setMessage] = useState("");
+  return (
+    <div
+      style={{
+        marginLeft: 8,
+        width: 400,
+        backgroundColor: "blue",
+        overflowY: "scroll",
+        borderRaduis: 8,
+        height: `calc(100vh - ${120 + 2 * 8}px)`,
+        padding: 8,
+      }}
+    >
+      <Title title={"Chat"} />
+
+      <div style={{ display: "flex" }}>
+        <input
+          value={message}
+          onChange={(e) => {
+            const v = e.target.value;
+            setMessage(v);
+          }}
+        />
+        <button
+          className={"button default"}
+          onClick={() => {
+            const m = message;
+
+            if (m.length) {
+              publish(m, { persist: true });
+              setMessage("");
+            }
+          }}
+        >
+          Send
+        </button>
+      </div>
+      <MessageList messages={messages} />
+    </div>
+  );
+};
 
 function MainApp() {
   const dispatch = useDispatch();

@@ -15,6 +15,7 @@ import actions from "../../actions";
 import Input from "../../components/Common/Input";
 import Button from "../../components/Common/Button";
 import Checkbox from "../../components/Common/Checkbox";
+import SelectOption from "../../components/Common/SelectOption";
 import LoadingIndicator from "../../components/Common/LoadingIndicator";
 import SignupProvider from "../../components/Common/SignupProvider";
 
@@ -87,6 +88,21 @@ class Signup extends React.PureComponent {
                   value={signupFormData.lastName}
                   onInputChange={(name, value) => {
                     signupChange(name, value);
+                  }}
+                />
+              </Col>
+              <Col xs="12" md="12">
+                <SelectOption
+                  error={formErrors["role"]}
+                  label={"Select Role"}
+                  name={"role"}
+                  options={[
+                    { value: "ROLE_MEMBER", label: "Buyer" },
+                    { value: "ROLE_MERCHANT", label: "Seller" },
+                  ]}
+                  value={signupFormData.role}
+                  handleSelectChange={(value) => {
+                    signupChange("role", value);
                   }}
                 />
               </Col>

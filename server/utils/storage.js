@@ -1,16 +1,16 @@
-const AWS = require('aws-sdk');
+const AWS = require("aws-sdk");
 
-const keys = require('../config/keys');
+const keys = require("../config/keys");
 
-exports.s3Upload = async image => {
-  let imageUrl = '';
-  let imageKey = '';
+exports.s3Upload = async (image) => {
+  let imageUrl = "";
+  let imageKey = "";
 
   if (image) {
     const s3bucket = new AWS.S3({
       accessKeyId: keys.aws.accessKeyId,
       secretAccessKey: keys.aws.secretAccessKey,
-      region: keys.aws.region
+      region: keys.aws.region,
     });
 
     const params = {
@@ -18,7 +18,7 @@ exports.s3Upload = async image => {
       Key: image.originalname,
       Body: image.buffer,
       ContentType: image.mimetype,
-      ACL: 'public-read'
+      ACL: "public-read",
     };
 
     const s3Upload = await s3bucket.upload(params).promise();

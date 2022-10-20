@@ -1,44 +1,44 @@
-const Mongoose = require('mongoose');
+const Mongoose = require("mongoose");
 const { Schema } = Mongoose;
 
 // Review Schema
 const ReviewSchema = new Schema({
   product: {
     type: Schema.Types.ObjectId,
-    ref: 'Product',
-    default: null
+    ref: "Product",
+    default: null,
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    default: null
+    ref: "User",
+    default: null,
   },
   title: {
     type: String,
-    trim: true
+    trim: true,
   },
   rating: {
     type: Number,
-    default: 0
+    default: 0,
   },
   review: {
     type: String,
-    trim: true
+    trim: true,
   },
   isRecommended: {
     type: Boolean,
-    default: true
+    default: true,
   },
   status: {
     type: String,
-    default: 'Waiting Approval',
-    enum: ['Waiting Approval', 'Rejected', 'Approved']
+    default: "Approved",
+    enum: ["Waiting Approval", "Rejected", "Approved"],
   },
   updated: Date,
   created: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-module.exports = Mongoose.model('Review', ReviewSchema);
+module.exports = Mongoose.model("Review", ReviewSchema);

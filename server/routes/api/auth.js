@@ -9,6 +9,7 @@ const auth = require("../../middleware/auth");
 
 // Bring in Models & Helpers
 const User = require("../../models/user");
+const Merchant = require("../../models/merchant");
 const mailchimp = require("../../services/mailchimp");
 const mailgun = require("../../services/mailgun");
 const keys = require("../../config/keys");
@@ -81,8 +82,10 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
+  console.log("Req ======>", req.body);
   try {
-    const { email, firstName, lastName, password, isSubscribed } = req.body;
+    const { email, firstName, lastName, password, isSubscribed, role } =
+      req.body;
 
     if (!email) {
       return res
@@ -114,18 +117,38 @@ router.post("/register", async (req, res) => {
         subscribed = true;
       }
     }
-
-    const user = new User({
-      email,
-      password,
-      firstName,
-      lastName,
-    });
-
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(user.password, salt);
+    const hash = await bcrypt.hash(password, salt);
+    let user;
+    if (role.value == "ROLE_MERCHANT") {
+      console.log("IN MErchnat");
+      let merchant = new Merchant({
+        name: `${firstName} ${lastName}`,
+        email,
+      });
+      const registeredMerchant = await merchant.save();
+      console.log("MERCHANT ======>", registeredMerchant);
+      user = new User({
+        merchant: registeredMerchant._id,
+        role: role.value,
+        firstName,
+        lastName,
+        email,
+        password: hash,
+      });
+    } else {
+      user = new User({
+        email,
+        password: hash,
+        firstName,
+        lastName,
+      });
+    }
 
-    user.password = hash;
+    // const salt = await bcrypt.genSalt(10);
+    // const hash = await bcrypt.hash(user.password, salt);
+
+    // user.password = hash;
     const registeredUser = await user.save();
 
     const payload = {
