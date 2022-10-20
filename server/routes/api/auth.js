@@ -121,13 +121,11 @@ router.post("/register", async (req, res) => {
     const hash = await bcrypt.hash(password, salt);
     let user;
     if (role.value == "ROLE_MERCHANT") {
-      console.log("IN MErchnat");
       let merchant = new Merchant({
         name: `${firstName} ${lastName}`,
         email,
       });
       const registeredMerchant = await merchant.save();
-      console.log("MERCHANT ======>", registeredMerchant);
       user = new User({
         merchant: registeredMerchant._id,
         role: role.value,
