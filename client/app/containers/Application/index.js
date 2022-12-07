@@ -33,6 +33,7 @@ import Contact from "../Contact";
 import OrderSuccess from "../OrderSuccess";
 import OrderPage from "../OrderPage";
 import AuthSuccess from "../AuthSuccess";
+import BidList from "../ProductPage/BidList";
 
 import Footer from "../../components/Common/Footer";
 import Page404 from "../../components/Common/Page404";
@@ -87,6 +88,7 @@ class Application extends React.PureComponent {
                 <Route path="/shop" component={Shop} />
                 <Route path="/live" component={LiveStreaming} />
                 <Route path="/videocall" component={App} />
+                <Route path="/bidlist" component={BidList} />
                 <Route path="/sell" component={Sell} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/brands" component={BrandsPage} />

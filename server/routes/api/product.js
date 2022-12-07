@@ -43,6 +43,25 @@ router.post("/set-meeting-id", async (req, res) => {
   }
 });
 
+// Top Product
+
+router.get("/top", async (req, res) => {
+  try {
+    const getTopProducts = await Product.find({})
+      .populate("merchant")
+      .sort({ sales: -1 })
+      .limit(5);
+    res.status(200).json({
+      success: true,
+      data: getTopProducts,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: "Your request could not be processed. Please try again.",
+    });
+  }
+});
+
 // fetch product slug api
 router.get("/item/:slug", async (req, res) => {
   try {

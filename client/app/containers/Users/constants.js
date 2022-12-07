@@ -4,7 +4,18 @@
  *
  */
 
-export const FETCH_USERS = 'src/Users/FETCH_USERS';
-export const FETCH_SEARCHED_USERS = 'src/Users/FETCH_SEARCHED_USERS';
-export const SET_ADVANCED_FILTERS = 'src/Users/SET_ADVANCED_FILTERS';
-export const SET_USERS_LOADING = 'src/Users/SET_USERS_LOADING';
+export const FETCH_USERS = "src/Users/FETCH_USERS";
+export const FETCH_SEARCHED_USERS = "src/Users/FETCH_SEARCHED_USERS";
+export const SET_ADVANCED_FILTERS = "src/Users/SET_ADVANCED_FILTERS";
+export const SET_USERS_LOADING = "src/Users/SET_USERS_LOADING";
+
+export const ADD_USER_REQUEST = "ADD_USER_REQUEST";
+export const ADD_USER_SUCCESS = "ADD_USER_SUCCESS";
+
+export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+
+export const DELETE_USER_REQUEST = "DELETE_USER_REQUEST";
+export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
+
+export const USER_ERROR = "USER_ERROR";

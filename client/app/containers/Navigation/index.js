@@ -123,6 +123,7 @@ class Navigation extends React.PureComponent {
       searchValue,
       suggestions,
       onSearch,
+      onKeywordsAdd,
       onSuggestionsFetchRequested,
       onSuggestionsClearRequested,
     } = this.props;
@@ -141,20 +142,20 @@ class Navigation extends React.PureComponent {
           <Container>
             <Row>
               <Col md="4" className="text-center d-none d-md-block">
-                <i className="fa fa-truck" />
-                <span>Free Shipping</span>
+                {/* <i className="fa fa-truck" />
+                <span>Free Shipping</span> */}
               </Col>
               <Col md="4" className="text-center d-none d-md-block">
-                <i className="fa fa-credit-card" />
-                <span>Payment Methods</span>
+                {/* <i className="fa fa-credit-card" />
+                <span>Payment Methods</span> */}
               </Col>
               <Col md="4" className="text-center d-none d-md-block">
                 <i className="fa fa-phone" />
-                <span>Call us 951-999-9999</span>
+                <span>Call us 0306-9225988</span>
               </Col>
               <Col xs="12" className="text-center d-block d-md-none">
                 <i className="fa fa-phone" />
-                <span> Need advice? Call us 951-999-9999</span>
+                <span> Need advice? Call us 0306-9225988</span>
               </Col>
             </Row>
           </Container>
@@ -199,8 +200,10 @@ class Navigation extends React.PureComponent {
                 renderSuggestion={this.renderSuggestion}
                 inputProps={inputProps}
                 onSuggestionSelected={(_, item) => {
-                  history.push(`/product/${item.suggestion.slug}`);
+                  onKeywordsAdd(item?.suggestion?.name);
+                  history.push(`/product/${item?.suggestion?.slug}`);
                 }}
+                // onSuggestionSelected={onKeywordsAdd}
               />
             </Col>
             <Col

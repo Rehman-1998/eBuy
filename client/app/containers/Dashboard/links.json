@@ -4,30 +4,37 @@
     { "to": "/security", "name": "Account Security", "prefix": "/dashboard" },
     { "to": "/address", "name": "Address", "prefix": "/dashboard" },
     { "to": "/product", "name": "Products", "prefix": "/dashboard" },
-    { "to": "/category", "name": "Categories", "prefix": "/dashboard" },
     { "to": "/users", "name": "Users", "prefix": "/dashboard" },
     { "to": "/merchant", "name": "Merchants", "prefix": "/dashboard" },
     { "to": "/orders", "name": "Orders", "prefix": "/dashboard" },
     { "to": "/review", "name": "Reviews", "prefix": "/dashboard" },
-    { "to": "/wishlist", "name": "WishList", "prefix": "/dashboard" },
-    { "to": "/support", "name": "Support" }
+    { "to": "/wishlist", "name": "WishList", "prefix": "/dashboard" }
   ],
   "ROLE_MERCHANT": [
     { "to": "", "name": "Account Details", "prefix": "/dashboard" },
     { "to": "/security", "name": "Account Security", "prefix": "/dashboard" },
     { "to": "/address", "name": "Address", "prefix": "/dashboard" },
     { "to": "/videocall", "name": "Create Meeting" },
+    { "to": "/bidlist", "name": "Bid Proposal", "prefix": "/dashboard" },
+    {
+      "to": "/searchkeywords",
+      "name": "Searching Words",
+      "prefix": "/dashboard"
+    },
+    {
+      "to": "/topproducts",
+      "name": "Top Sales",
+      "prefix": "/dashboard"
+    },
     { "to": "/product", "name": "Products", "prefix": "/dashboard" },
     { "to": "/orders", "name": "Orders", "prefix": "/dashboard" },
-    { "to": "/wishlist", "name": "WishList", "prefix": "/dashboard" },
-    { "to": "/support", "name": "Support" }
+    { "to": "/wishlist", "name": "WishList", "prefix": "/dashboard" }
   ],
   "ROLE_MEMBER": [
     { "to": "", "name": "Account Details", "prefix": "/dashboard" },
     { "to": "/security", "name": "Account Security", "prefix": "/dashboard" },
     { "to": "/address", "name": "Address", "prefix": "/dashboard" },
     { "to": "/orders", "name": "Orders", "prefix": "/dashboard" },
-    { "to": "/wishlist", "name": "WishList", "prefix": "/dashboard" },
-    { "to": "/support", "name": "Support" }
+    { "to": "/wishlist", "name": "WishList", "prefix": "/dashboard" }
   ]
 }

@@ -20,6 +20,9 @@ import Brand from "../../../containers/Brand";
 import Order from "../../../containers/Order";
 import Wishlist from "../../../containers/WishList";
 import MainApp from "../../../containers/LiveStreaming/MainApp";
+import BidList from "../../../containers/ProductPage/BidList";
+import SearchKeywords from "../../../containers/SearchKeywords/SearchKeywords";
+import TopProducts from "../../../containers/ProductPage/TopProducts";
 
 const Customer = (props) => {
   return (
@@ -36,6 +39,12 @@ const Customer = (props) => {
               <Route path="/dashboard/address" component={Address} />
               <Route path="/dashboard/product" component={Product} />
               <Route path="/dashboard/brand" component={Brand} />
+              <Route path="/dashboard/bidlist" component={BidList} />
+              <Route
+                path="/dashboard/searchkeywords"
+                component={SearchKeywords}
+              />
+              <Route path="/dashboard/topproducts" component={TopProducts} />
               <Route path="/dashboard/orders" component={Order} />
               <Route path="/dashboard/wishlist" component={Wishlist} />
               <Route path="/dashboard/live" component={MainApp} />

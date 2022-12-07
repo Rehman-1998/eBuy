@@ -58,6 +58,10 @@ const ProductSchema = new Schema({
   meetingTime: {
     type: String,
   },
+  sales: {
+    type: Number,
+    default: 0,
+  },
   // brand: {
   //   type: Schema.Types.ObjectId,
   //   ref: 'Brand',

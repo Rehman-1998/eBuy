@@ -1,0 +1,23 @@
+/*
+ *
+ * Bid constants
+ *
+ */
+
+export const BID_REQUEST = "BID_REQUEST";
+
+// FOR SELLER
+export const BID_FOR_SELLER_REQUEST = "BID_FOR_SELLER_REQUEST";
+export const BID_FOR_SELLER_SUCCESS = "BID_FOR_SELLER_SUCCESS";
+
+// FOR USER
+export const BID_SUCCESS = "BID_SUCCESS";
+export const BID_ERROR = "BID_ERROR";
+
+// DELETE
+export const BID_DELETE_REQUEST = "BID_DELETE_REQUEST";
+export const BID_DELETE_SUCCESS = "BID_DELETE_SUCCESS";
+
+// UPDATE
+export const BID_UPDATE_REQUEST = "BID_UPDATE_REQUEST";
+export const BID_UPDATE_SUCCESS = "BID_UPDATE_SUCCESS";

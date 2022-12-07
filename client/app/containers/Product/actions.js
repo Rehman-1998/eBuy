@@ -344,7 +344,7 @@ export const updateProduct = () => {
         quantity: "required|numeric",
         price: "required|numeric",
         taxable: "required",
-        brand: "required",
+        // brand: "required",
       };
 
       const product = getState().product.product;

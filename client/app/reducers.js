@@ -34,6 +34,7 @@ import orderReducer from "./containers/Order/reducer";
 import reviewReducer from "./containers/Review/reducer";
 import wishListReducer from "./containers/WishList/reducer";
 import liveStreamReducer from "./containers/LiveStreaming/reducer";
+import bidReducer from "./containers/ProductPage/reducer";
 
 const createReducer = (history) =>
   combineReducers({
@@ -64,6 +65,7 @@ const createReducer = (history) =>
     review: reviewReducer,
     wishlist: wishListReducer,
     liveStream: liveStreamReducer,
+    bid: bidReducer,
   });
 
 export default createReducer;

@@ -9,7 +9,6 @@ const ROLES = {
 const checkRole =
   (...roles) =>
   (req, res, next) => {
-    console.log("Role Middleware ======>", roles);
     if (!req.user) {
       return res.status(401).send("Unauthorized");
     }
