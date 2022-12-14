@@ -302,13 +302,14 @@ router.post(
   role.checkRole(role.ROLES.Admin, role.ROLES.Merchant),
   upload.single("image"),
   async (req, res) => {
+    console.log("before try ");
     try {
-      const sku = req.body.sku;
+      // const sku = req.body.sku;
       const name = req.body.name;
       const description = req.body.description;
       const quantity = req.body.quantity;
       const price = req.body.price;
-      const taxable = req.body.taxable;
+      // const taxable = req.body.taxable;
       const isActive = req.body.isActive;
       const merchant = req.body.merchant;
       const meetingId = "";
@@ -316,10 +317,10 @@ router.post(
       // const brand = req.body.brand;
       const image = req.file;
 
-      if (!sku) {
-        return res.status(400).json({ error: "You must enter sku." });
-      }
-
+      // if (!sku) {
+      //   return res.status(400).json({ error: "You must enter sku." });
+      // }
+      console.log("in Try");
       if (!description || !name) {
         return res
           .status(400)
@@ -334,21 +335,21 @@ router.post(
         return res.status(400).json({ error: "You must enter a price." });
       }
 
-      const foundProduct = await Product.findOne({ sku });
+      // const foundProduct = await Product.findOne({ sku });
 
-      if (foundProduct) {
-        return res.status(400).json({ error: "This sku is already in use." });
-      }
-
+      // if (foundProduct) {
+      //   return res.status(400).json({ error: "This sku is already in use." });
+      // }
+      console.log("before update image");
       const { imageUrl, imageKey } = await s3Upload(image);
-
+      console.log("after update image", imageUrl, imageKey);
       const product = new Product({
-        sku,
+        // sku,
         name,
         description,
         quantity,
         price,
-        taxable,
+        // taxable,
         isActive,
         // brand,
         imageUrl,
@@ -357,15 +358,16 @@ router.post(
         meetingId,
         meetingTime,
       });
-
+      console.log("before save");
       const savedProduct = await product.save();
-
+      console.log("after saved ===", savedProduct);
       res.status(200).json({
         success: true,
         message: `Product has been added successfully!`,
         product: savedProduct,
       });
     } catch (error) {
+      console.log("in Catch");
       return res.status(400).json({
         error: "Your request could not be processed. Please try again.",
       });
@@ -425,25 +427,25 @@ router.get(
 
       let productDoc = null;
 
-      if (req.user.merchant) {
-        const brands = await Brand.find({
-          merchant: req.user.merchant,
-        }).populate("merchant", "_id");
+      // if (req.user.merchant) {
+      //   const brands = await Brand.find({
+      //     merchant: req.user.merchant,
+      //   }).populate("merchant", "_id");
 
-        const brandId = brands[0]["_id"];
+      //   const brandId = brands[0]["_id"];
 
-        productDoc = await Product.findOne({ _id: productId })
-          .populate({
-            path: "brand",
-            select: "name",
-          })
-          .where("brand", brandId);
-      } else {
-        productDoc = await Product.findOne({ _id: productId }).populate({
-          path: "brand",
-          select: "name",
-        });
-      }
+      //   productDoc = await Product.findOne({ _id: productId })
+      //     .populate({
+      //       path: "brand",
+      //       select: "name",
+      //     })
+      //     .where("brand", brandId);
+      // } else {
+      productDoc = await Product.findOne({ _id: productId }).populate({
+        path: "brand",
+        select: "name",
+      });
+      // }
 
       if (!productDoc) {
         return res.status(404).json({
@@ -471,17 +473,17 @@ router.put(
       const productId = req.params.id;
       const update = req.body.product;
       const query = { _id: productId };
-      const { sku, slug } = req.body.product;
+      // const { sku, slug } = req.body.product;
 
-      const foundProduct = await Product.findOne({
-        $or: [{ slug }, { sku }],
-      });
+      // const foundProduct = await Product.findOne({
+      //   $or: [{ slug }, { sku }],
+      // });
 
-      if (foundProduct && foundProduct._id != productId) {
-        return res
-          .status(400)
-          .json({ error: "Sku or slug is already in use." });
-      }
+      // if (foundProduct && foundProduct._id != productId) {
+      //   return res
+      //     .status(400)
+      //     .json({ error: "Sku or slug is already in use." });
+      // }
 
       await Product.findOneAndUpdate(query, update, {
         new: true,

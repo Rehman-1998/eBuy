@@ -5,13 +5,19 @@ const Mongoose = require("mongoose");
 // Bring in Models & Utils
 const Order = require("../../models/order");
 const Cart = require("../../models/cart");
+const User = require("../../models/user");
+const Merchant = require("../../models/merchant");
 const Product = require("../../models/product");
 const auth = require("../../middleware/auth");
 const role = require("../../middleware/role");
 const mailgun = require("../../services/mailgun");
 const store = require("../../utils/store");
 const sgMail = require("@sendgrid/mail");
-const { orderConfirmationEmail } = require("../../config/template");
+const {
+  orderConfirmationEmail,
+  orderEmailToMerchant,
+} = require("../../config/template");
+const merchant = require("../../models/merchant");
 
 router.post("/add", auth, async (req, res) => {
   try {
@@ -29,10 +35,41 @@ router.post("/add", auth, async (req, res) => {
 
     const cartDoc = await Cart.findById(orderDoc.cart._id).populate({
       path: "products.product",
-      populate: {
-        path: "brand",
-      },
     });
+    const buyerDetails = await User.findById({ _id: user });
+    let merchants = [];
+    let obj = {};
+    cartDoc.products.forEach(async (item) => {
+      obj = await Merchant.findById({
+        _id: item?.product?.merchant,
+      });
+      console.log("obj=====>", obj);
+      merchants.push(obj);
+      sgMail
+        .send(
+          orderEmailToMerchant({
+            email: obj.email,
+            _id: newOrder._id,
+            buyer: buyerDetails,
+            products: item,
+          })
+        )
+        .then(
+          (success) => {
+            console.log("success====>", success);
+          },
+          (error) => {
+            console.error("Error======>", error);
+
+            if (error.response) {
+              console.error(error.response.body);
+            }
+          }
+        );
+    });
+    console.log("Cart Doc ====>", cartDoc);
+    console.log("buyerDetails =====>", buyerDetails);
+    console.log("merchantDetails =======>", merchants);
 
     const newOrder = {
       _id: orderDoc._id,
@@ -48,6 +85,7 @@ router.post("/add", auth, async (req, res) => {
           email: req.user.email,
           _id: newOrder._id,
           name: req.user.firstName,
+          products: cartDoc.products,
         })
       )
       .then(
@@ -62,6 +100,27 @@ router.post("/add", auth, async (req, res) => {
           }
         }
       );
+    // sgMail
+    // .send(
+    //   orderEmailToMerchant({
+    //     email: req.user.email,
+    //     _id: newOrder._id,
+    //     name: req.user.firstName,
+    //     products: cartDoc.products,
+    //   }),
+    // )
+    // .then(
+    //   (success) => {
+    //     console.log("success====>", success);
+    //   },
+    //   (error) => {
+    //     console.error("Error======>", error);
+
+    //     if (error.response) {
+    //       console.error(error.response.body);
+    //     }
+    //   }
+    // );
 
     // await mailgun.sendEmail(order.user.email, "order-confirmation", newOrder);
 

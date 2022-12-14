@@ -14,7 +14,7 @@ console.log(
 export const getToken = async () => {
   console.log("hi");
   let token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI5MmU3NzE4Yy04ZDg0LTRhNmItYTc1NC02NTlhMTdhZTlmYTYiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY2NTY1ODA5NiwiZXhwIjoxNjY2MjYyODk2fQ.WiX2zenpgzLuksNpXjrH5lTp1s0kOFaMrk0cLpxuFbo";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI5MmU3NzE4Yy04ZDg0LTRhNmItYTc1NC02NTlhMTdhZTlmYTYiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY3MTAwODAyMCwiZXhwIjoxNzAyNTQ0MDIwfQ.CicoWQ3oKm6gEpViKwR6ZmJMpH1fcmbUfEklonV9pkw";
 
   return token;
 

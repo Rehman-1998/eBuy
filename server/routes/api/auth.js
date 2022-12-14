@@ -72,6 +72,7 @@ router.post("/login", async (req, res) => {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
+        address: user.address,
       },
     });
   } catch (error) {
@@ -84,8 +85,17 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
   console.log("Req ======>", req.body);
   try {
-    const { email, firstName, lastName, password, isSubscribed, role } =
-      req.body;
+    const {
+      email,
+      firstName,
+      lastName,
+      password,
+      isSubscribed,
+      role,
+      address,
+      city,
+      phoneNumber,
+    } = req.body;
 
     if (!email) {
       return res
@@ -132,6 +142,9 @@ router.post("/register", async (req, res) => {
         firstName,
         lastName,
         email,
+        address,
+        city,
+        phoneNumber,
         password: hash,
       });
     } else {
@@ -140,6 +153,10 @@ router.post("/register", async (req, res) => {
         password: hash,
         firstName,
         lastName,
+        role: role.value,
+        address,
+        city,
+        phoneNumber,
       });
     }
 

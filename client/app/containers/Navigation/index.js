@@ -170,7 +170,7 @@ class Navigation extends React.PureComponent {
               className="pr-0"
             >
               <div className="brand">
-                {categories && categories.length > 0 && (
+                {/* {categories && categories.length > 0 && (
                   <Button
                     borderless
                     variant="empty"
@@ -179,7 +179,7 @@ class Navigation extends React.PureComponent {
                     icon={<BarsIcon />}
                     onClick={() => this.toggleMenu()}
                   />
-                )}
+                )} */}
                 <Link to="/">
                   <h1 className="logo">eBuy</h1>
                 </Link>

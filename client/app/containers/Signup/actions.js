@@ -46,6 +46,9 @@ export const signUp = () => {
         firstName: "required",
         lastName: "required",
         role: "required",
+        city: "required",
+        address: "required",
+        phoneNumber: "required",
       };
 
       const newUser = getState().signup.signupFormData;
@@ -57,6 +60,9 @@ export const signUp = () => {
         "required.firstName": "First Name is required.",
         "required.lastName": "Last Name is required.",
         "required.role": "Role is required.",
+        "required.address": "Address is required.",
+        "required.city": "City is required.",
+        "required.phoneNumber": "Phone Number is required.",
       });
 
       if (!isValid) {

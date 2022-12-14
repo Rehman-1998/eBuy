@@ -4,30 +4,30 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col } from "reactstrap";
 
-const CartSummary = props => {
+const CartSummary = (props) => {
   const { cartTotal } = props;
 
   return (
-    <div className='cart-summary'>
+    <div className="cart-summary">
       <Container>
-        <Row className='mb-2 summary-item'>
+        {/* <Row className='mb-2 summary-item'>
           <Col xs='9'>
             <p className='summary-label'>Free Shippling</p>
           </Col>
           <Col xs='3' className='text-right'>
             <p className='summary-value'>$0</p>
           </Col>
-        </Row>
-        <Row className='mb-2 summary-item'>
-          <Col xs='9'>
-            <p className='summary-label'>Total</p>
+        </Row> */}
+        <Row className="mb-2 summary-item">
+          <Col xs="9">
+            <p className="summary-label">Total</p>
           </Col>
-          <Col xs='3' className='text-right'>
-            <p className='summary-value'>${cartTotal}</p>
+          <Col xs="3" className="text-right">
+            <p className="summary-value">{cartTotal} Rs</p>
           </Col>
         </Row>
       </Container>

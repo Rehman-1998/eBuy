@@ -38,7 +38,7 @@ const AddProduct = (props) => {
     <div className="add-product">
       <form onSubmit={handleSubmit} noValidate>
         <Row>
-          <Col xs="12" lg="6">
+          {/* <Col xs="12" lg="6">
             <Input
               type={"text"}
               error={formErrors["sku"]}
@@ -50,8 +50,8 @@ const AddProduct = (props) => {
                 productChange(name, value);
               }}
             />
-          </Col>
-          <Col xs="12" lg="6">
+          </Col> */}
+          <Col xs="12" lg="12">
             <Input
               type={"text"}
               error={formErrors["name"]}
@@ -117,7 +117,7 @@ const AddProduct = (props) => {
               }}
             />
           </Col>
-          <Col xs="12" md="12">
+          {/* <Col xs="12" md="12">
             <SelectOption
               error={formErrors["taxable"]}
               label={"Taxable"}
@@ -128,7 +128,7 @@ const AddProduct = (props) => {
                 productChange("taxable", value);
               }}
             />
-          </Col>
+          </Col> */}
           {/* <Col xs='12' md='12'>
             <SelectOption
               disabled={user.role === 'ROLE_MERCHANT'}

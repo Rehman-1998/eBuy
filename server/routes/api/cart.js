@@ -26,9 +26,10 @@ router.post("/add", auth, async (req, res) => {
   try {
     const user = req.user._id;
     const items = req.body.products;
-    console.log("IN CART POST API ======>", user, items);
 
     const products = store.caculateItemsSalesTax(items);
+    // let products = items.map((item)=>({product:item.product,quantity:item.quantity,purchasePrice:item.price}));
+    console.log("IN CART POST API ======>", user, items, products);
 
     const cart = new Cart({
       user,

@@ -4,21 +4,21 @@
  *
  */
 
-import React from 'react';
-import Slider, { SliderTooltip } from 'rc-slider';
+import React from "react";
+import Slider, { SliderTooltip } from "rc-slider";
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 const { Handle } = Slider;
 
-const handle = props => {
+const handle = (props) => {
   const { value, dragging, index, ...restProps } = props;
   return (
     <SliderTooltip
-      prefixCls='rc-slider-tooltip'
+      prefixCls="rc-slider-tooltip"
       overlay={`$${value}`}
       visible={dragging}
-      placement='top'
+      placement="top"
       key={index}
     >
       <Handle value={value} {...restProps} />
@@ -31,27 +31,27 @@ class RangeSlider extends React.Component {
     super(props);
     this.state = {
       sliderValue: 50,
-      rangeValue: this.props.defaultValue
+      rangeValue: this.props.defaultValue,
     };
   }
 
-  onSliderChange = v => {
+  onSliderChange = (v) => {
     this.setState({
-      sliderValue: v
+      sliderValue: v,
     });
   };
 
-  onRangeChange = v => {
+  onRangeChange = (v) => {
     this.setState({
-      rangeValue: v
+      rangeValue: v,
     });
   };
 
-  onAfterSliderChange = value => {
+  onAfterSliderChange = (value) => {
     this.props.onChange(value);
   };
 
-  onAfterRangeChange = value => {
+  onAfterRangeChange = (value) => {
     this.props.onChange(value);
   };
 
@@ -61,9 +61,9 @@ class RangeSlider extends React.Component {
 
     return (
       <>
-        {type === 'slider' ? (
+        {type === "slider" ? (
           <Slider
-            className='slider'
+            className="slider"
             dots
             reverse
             allowCross={allowCross}
@@ -76,7 +76,7 @@ class RangeSlider extends React.Component {
           />
         ) : (
           <Range
-            className='slider'
+            className="slider"
             pushable={10}
             allowCross={allowCross}
             min={1}
@@ -85,7 +85,7 @@ class RangeSlider extends React.Component {
             defaultValue={defaultValue}
             marks={marks}
             handle={handle}
-            tipFormatter={value => `$${value}`}
+            tipFormatter={(value) => `${value}`}
             value={rangeValue}
             onChange={this.onRangeChange}
             onAfterChange={this.onAfterRangeChange}
@@ -97,8 +97,8 @@ class RangeSlider extends React.Component {
 }
 
 RangeSlider.defaultProps = {
-  type: 'range',
-  allowCross: true
+  type: "range",
+  allowCross: true,
 };
 
 export default RangeSlider;

@@ -101,8 +101,16 @@ exports.merchantApplicationEmail = (email) => {
   return message;
 };
 
-exports.orderConfirmationEmail = ({ email, _id, name }) => {
-  console.log("IN Order", email, _id, name);
+exports.orderConfirmationEmail = ({ email, _id, name, products }) => {
+  console.log("IN Order", products);
+  let orderProduct = products.map((item) => ({
+    Product: item.product.name,
+    staus: item.status,
+    quantity: item.quantity,
+    price: item.product.price,
+  }));
+  let jsonData = JSON.stringify(orderProduct);
+  console.log("object", orderProduct);
   const message = {
     to: email,
     from: "70070364@student.uol.edu.pk",
@@ -110,7 +118,38 @@ exports.orderConfirmationEmail = ({ email, _id, name }) => {
     subject: `Order Confirmation ${_id}`,
     text:
       `Hi ${name}! Thank you for your order!. \n\n` +
-      `We've received your order and will contact you as soon as your package is shipped. \n\n`,
+      `We've received your order ${jsonData} and will contact you as soon as Possible. \n\n`,
+  };
+
+  return message;
+};
+
+exports.orderEmailToMerchant = ({ email, _id, buyer, products }) => {
+  console.log("IN Merchant EMail =====>", products, buyer);
+  let orderProduct = {
+    Name: products.product.name,
+    quantity: products.quantity,
+    price: products.totalPrice,
+  };
+  let buyerObj = {
+    firstName: buyer.firstName,
+    lastName: buyer.lastName,
+    email: buyer.email,
+    phoneNumber: buyer.phoneNumber,
+    address: buyer.address,
+    city: buyer.city,
+  };
+  let jsonData = JSON.stringify(orderProduct);
+  let buyerDetails = JSON.stringify(buyerObj);
+  console.log("Merchant Mail Order Product ====>", orderProduct);
+  const message = {
+    to: email,
+    from: "70070364@student.uol.edu.pk",
+    // subject: `Order Confirmation ${order._id}`,
+    subject: `Order Confirmation ${_id}`,
+    text:
+      `You got new order ! customer details ${buyerDetails} \n\n` +
+      `Product Details : ${jsonData}  \n\n`,
   };
 
   return message;
