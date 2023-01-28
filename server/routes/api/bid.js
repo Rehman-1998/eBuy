@@ -103,6 +103,7 @@ router.put(
     try {
       console.log("IN API =====>", req.body);
       const { item, status } = req.body;
+      console.log("req body---", item, status, req.body);
       if (status === "Approved") {
         const products = [
           {
@@ -131,6 +132,7 @@ router.put(
                   email: "abdulrehmanazmat007@gmail.com",
                   name: "abdul rehman",
                   _id: newOrder._id,
+                  products: products,
                 })
               )
               .then(
@@ -164,13 +166,16 @@ router.put(
           }
         }
       } else {
+        console.log("IN ELSE Condition", item);
         const updateData = await Bid.findOneAndUpdate(
-          { _id: req.body.item._id },
+          { _id: item._id },
           { $set: { status: status } },
           {
             new: true,
           }
         );
+
+        console.log("update Data", updateData);
 
         if (updateData) {
           res.status(200).json({

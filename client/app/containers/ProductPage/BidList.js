@@ -152,7 +152,7 @@ const BidList = (props) => {
                       size="md"
                       text="Reject"
                       onClick={() =>
-                        dispatch(updateBidRequest(item._id, "Rejected"))
+                        dispatch(updateBidRequest(item, "Rejected"))
                       }
                     />
                   </div>
